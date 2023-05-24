@@ -5,5 +5,7 @@ import CustomNavbar from './components/CustomNavbar.vue'
 
 <template>
   <CustomNavbar />
-  <RouterView />
+  <div class="container mx-auto">
+    <RouterView />
+  </div>
 </template>
