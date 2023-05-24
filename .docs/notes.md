@@ -34,6 +34,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "node_modules/preline/dist/*.js",
   ],
   theme: {
     extend: {},
@@ -51,6 +52,41 @@ export default {
 @tailwind utilities;
 ```
 
-5. Clean the starter project files and assets, leaving only the essential files to make the routing work and to start working on the TW experiments. In the end, this is what it should look like:
+### [Install Preline UI with Vue.js using Tailwind CSS](https://preline.co/docs/frameworks-vuejs.html)
 
-![hello tailwind](/.docs/Screenshot_20230524_113511.png)
+1. Install Preline UI
+
+```bash
+npm install preline
+```
+
+2. Configure Preline UI JavaScript paths
+
+```JavaScript
+/* tailwind.config.js */
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "node_modules/preline/dist/*.js",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+3. Add the Preline UI JavaScript
+
+```JavaScript
+// main.js
+
+import('preline')
+```
+
+### Clean the starter project files and assets, leaving only the essential files to make the routing work and to start working with TW. In the end, this is what it should look like:
+
+![hello tailwind](/.docs/Screenshot_20230524_172233.png)
