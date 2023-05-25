@@ -5,12 +5,22 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
     "node_modules/preline/dist/*.js",
   ],
+
   theme: {
     // https://tailwindcss.com/docs/customizing-colors#using-custom-colors
-    // once defined here, the default TW colors will be all overwritten
+    // by defining custom colors here, all other default TW colors will be lost
+    // use the `extend: {}` object instead
     // colors: {
     //   vuejs: "#49e659"
     // },
+    
+    // https://tailwindcss.com/docs/font-size#customizing-your-theme
+    // by defining custom font sizes here, all other default TW font sizes will be lost
+    // use the `extend: {}` object instead
+    // fontSize: {
+    //   base: '18px',
+    // },
+    
     extend: {
       // placing them here will have the effect of adding them to the original TW set of colors
       colors: {
@@ -29,8 +39,12 @@ module.exports = {
           900: '#094510',
           950: '#062C0A'
         }
-      }
+      },
+      fontSize: {
+        base: '20px',
+      },
     },
+
     // https://tailwindcss.com/docs/screens
     // global media query breakpoints can be customized here
     screens: {
@@ -45,6 +59,7 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
+
     // https://tailwindcss.com/docs/customizing-spacing
     // spacing and sizing scale for your project can be customized here
     // spacing: {
@@ -56,6 +71,7 @@ module.exports = {
     //   '6': '48px',
     // }
   },
+
   plugins: [
     require('preline/plugin'),
   ],

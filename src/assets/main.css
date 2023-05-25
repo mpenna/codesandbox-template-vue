@@ -17,6 +17,11 @@ to Tailwind’s base, components, and utilities layers */
 /* use the theme function or the @apply directive when adding custom base 
 styles if you want to refer to any of the values defined in your theme */
 @layer base {
+  /* specify the Inter font family that has been imported inside `base.css` */
+  html {
+    font-family: 'Inter', sans-serif;
+  }
+
   body {
     @apply bg-gray-50 dark:bg-slate-900
   }
