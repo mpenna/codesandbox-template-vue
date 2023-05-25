@@ -1,8 +1,4 @@
 <template>
-  <!-- <h1 class="text-green-600">
-    Hello Tailwind!
-  </h1> -->
-
   <div class="flex flex-col">
     <div class="-m-1.5 overflow-x-auto">
       <div class="p-1.5 min-w-full inline-block align-middle">

@@ -1,5 +1,21 @@
 @import "./base.css";
 
+/* custom CSS rules can be added to your stylesheet */
+/* body {
+  background-color: lime;
+} */
+
+/* for more power, you can also use the @layer directive to add styles 
+to Tailwind’s base, components, and utilities layers */
+/* @layer base {
+  body {
+    background-color: lime;
+  }
+} */
+
+/* https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer */
+/* use the theme function or the @apply directive when adding custom base 
+styles if you want to refer to any of the values defined in your theme */
 @layer base {
   body {
     @apply bg-gray-50 dark:bg-slate-900
