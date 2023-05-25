@@ -53,13 +53,38 @@ const router = createRouter({
         chapter: 'Spaces and Sizes'
       }
     },
+    // {
+    //   path: '/flex',
+    //   name: 'flex',
+    //   // route level code-splitting
+    //   // this generates a separate chunk (About.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: () => import('../views/FlexView.vue'),
+    //   meta: {
+    //     chapter: 'Flex'
+    //   }
+    // },
     {
       path: '/flex',
       name: 'flex',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/FlexView.vue'),
+      component: () => import('../views/Flex/IndexView.vue'),
+      children: [
+        {
+          path: '1',
+          component: () => import('../views/Flex/Example1View.vue'),
+        },
+        {
+          path: '2',
+          component: () => import('../views/Flex/Example2View.vue'),
+        },
+        {
+          path: '3',
+          component: () => import('../views/Flex/Example3View.vue'),
+        }
+      ],
       meta: {
         chapter: 'Flex'
       }
