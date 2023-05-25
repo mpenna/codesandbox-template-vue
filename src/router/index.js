@@ -43,6 +43,17 @@ const router = createRouter({
       }
     },
     {
+      path: '/spacessizes',
+      name: 'spacessizes',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/SpacesSizesView.vue'),
+      meta: {
+        chapter: 'Spaces and Sizes'
+      }
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
