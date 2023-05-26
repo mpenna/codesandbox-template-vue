@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from '@vue/reactivity';
 import { RouterLink, useRoute } from 'vue-router'
+import NavLink from './NavLink.vue';
 
 // const router = useRouter()
 
@@ -66,8 +67,7 @@ const nodeAttrs = (node) => {
 
 <template>
   <li v-for="node in nodes" v-bind="nodeAttrs(node)">
-    <RouterLink v-if="!node.children?.length" :to="currentPath(node)"
-      class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-md hover:bg-gray-800 hover:text-white-300">
+    <NavLink v-if="!node.children?.length" :to="currentPath(node)">
       <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
         viewBox="0 0 16 16">
         <path
@@ -76,7 +76,7 @@ const nodeAttrs = (node) => {
           d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
       </svg>
       {{ node.meta.displayName }}
-    </RouterLink>
+    </NavLink>
 
     <a v-if="node.children?.length" href="javascript:;"
       class="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-gray-400 rounded-md hover:bg-gray-800 hover:text-white">
