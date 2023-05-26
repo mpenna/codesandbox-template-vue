@@ -1,10 +1,15 @@
 <script setup>
-import { RouterView } from 'vue-router'
-import CustomNavbar from './components/CustomNavbar.vue'
+import { RouterView, useRouter, useRoute } from 'vue-router'
+// import CustomNavbar from './components/CustomNavbar.vue'
+
+const route = useRoute()
+const router = useRouter()
+
+// console.log(router.getRoutes())
+console.log(router.options.routes)
 </script>
 
 <template>
-  <!-- ========== MAIN CONTENT ========== -->
   <!-- Sidebar Toggle -->
   <div
     class="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-gray-800 dark:border-gray-700">
@@ -21,18 +26,30 @@ import CustomNavbar from './components/CustomNavbar.vue'
       <!-- End Navigation Toggle -->
 
       <!-- Breadcrumb -->
-      <ol class="ml-3 flex items-center whitespace-nowrap min-w-0" aria-label="Breadcrumb">
+      <ol class="ml-3 flex space-x-1 whitespace-nowrap min-w-0" aria-label="Breadcrumb">
         <li class="flex items-center text-sm text-gray-800 dark:text-gray-400">
-          Application Layout
+          Tailwind CSS
           <svg class="flex-shrink-0 mx-3 overflow-visible h-2.5 w-2.5 text-gray-400 dark:text-gray-600" width="16"
-            height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" />
-          </svg>
+          height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" />
+        </svg>
         </li>
-        <li class="text-sm font-semibold text-gray-800 truncate dark:text-gray-400" aria-current="page">
-          Dashboard
-        </li>
+        <div v-for="(matched, idx) in route.matched" :key="idx">
+          <li v-if="idx != Object.keys(route.matched).length - 1"
+            class="text-sm text-gray-800 truncate dark:text-gray-400" aria-current="page">
+            <RouterLink :to="matched.path">{{ matched.meta.displayName }}</RouterLink>
+            <span class="ml-1">/</span>
+            <!-- <svg class="flex-shrink-0 mx-3 overflow-visible h-2.5 w-2.5 text-gray-400 dark:text-gray-600" width="16"
+                                                                          height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                          <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor"
+                                                                            stroke-width="2" stroke-linecap="round" />
+                                                                        </svg> -->
+          </li>
+          <li v-else class="text-sm font-semibold text-gray-800 truncate dark:text-gray-400" aria-current="page">
+            {{ matched.meta.displayName }}
+          </li>
+        </div>
       </ol>
       <!-- End Breadcrumb -->
     </div>
@@ -42,12 +59,20 @@ import CustomNavbar from './components/CustomNavbar.vue'
   <!-- Sidebar -->
   <div id="application-sidebar-dark"
     class="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[60] w-64 bg-gray-900 border-r border-gray-800 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0">
+    <!-- Sidebar Header -->
     <div class="px-6">
-      <RouterLink to="/" class="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">TW CSS
-      </RouterLink>
-    </div>
+      <RouterLink to="/" class="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">
+      TW CSS
+    </RouterLink>
+  </div>
+  <!-- End Sidebar Header -->
 
-    <nav class="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
+  <!-- Sidebar Menu -->
+  <nav class="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
+    <ul class="space-y-1.5">
+      <TreeMenu :nodes="router.options.routes" />
+    </ul>
+    <!-- 
       <ul class="space-y-1.5">
         <li>
           <RouterLink to="/" class="flex items-center gap-x-3 py-2 px-2.5 bg-gray-700 text-sm text-white rounded-md">
@@ -167,35 +192,27 @@ import CustomNavbar from './components/CustomNavbar.vue'
 
         <li>
           <RouterLink to="/about"
-            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-md hover:bg-gray-800 hover:text-white-300">
-            <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-              viewBox="0 0 16 16">
-              <path
-                d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
-            </svg>
-            About
-          </RouterLink>
-        </li>
-      </ul>
+                class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-md hover:bg-gray-800 hover:text-white-300">
+                  <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+                  </svg>
+                  About
+                </RouterLink>
+              </li>
+            </ul>
+             -->
     </nav>
+    <!-- End Sidebar Menu -->
   </div>
   <!-- End Sidebar -->
 
-<!-- Content -->
-<div class="w-full pt-10 px-4 sm:px-6 md:px-8 lg:pl-72">
-  <!-- Page Heading -->
-  <!-- 
-    <header>
-        <h1 class="block text-2xl font-bold text-gray-800 sm:text-3xl dark:text-white">
-          Application Layout: Sidebar Dark using Tailwind CSS
-        </h1>
-      </header>
-      -->
+  <!-- Content -->
+  <div class="w-full pt-10 px-4 sm:px-6 md:px-8 lg:pl-72">
     <RouterView />
-    <!-- End Page Heading -->
   </div>
   <!-- End Content -->
-  <!-- ========== END MAIN CONTENT ========== -->
 </template>
 
 <!-- <template>

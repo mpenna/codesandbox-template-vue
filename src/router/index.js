@@ -8,6 +8,9 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: {
+        displayName: 'Home'
+      }
     },
     {
       path: '/colors',
@@ -17,7 +20,7 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/ColorsView.vue'),
       meta: {
-        chapter: 'Colors'
+        displayName: 'Colors'
       }
     },
     {
@@ -28,7 +31,7 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/CustomizationView.vue'),
       meta: {
-        chapter: 'Customization'
+        displayName: 'Customization'
       }
     },
     {
@@ -39,7 +42,7 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/TypographyView.vue'),
       meta: {
-        chapter: 'Typography'
+        displayName: 'Typography'
       }
     },
     {
@@ -50,20 +53,9 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/SpacesSizesView.vue'),
       meta: {
-        chapter: 'Spaces and Sizes'
+        displayName: 'Spaces and Sizes'
       }
     },
-    // {
-    //   path: '/flex',
-    //   name: 'flex',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/FlexView.vue'),
-    //   meta: {
-    //     chapter: 'Flex'
-    //   }
-    // },
     {
       path: '/flex',
       name: 'flex',
@@ -71,23 +63,35 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/Flex/IndexView.vue'),
+      meta: {
+        displayName: 'Flex'
+      },
       children: [
         {
           path: '1',
+          name: 'example-1',
           component: () => import('../views/Flex/Example1View.vue'),
+          meta: {
+            displayName: 'Example #1'
+          }
         },
         {
           path: '2',
+          name: 'example-2',
           component: () => import('../views/Flex/Example2View.vue'),
+          meta: {
+            displayName: 'Example #2'
+          }
         },
         {
           path: '3',
+          name: 'example-3',
           component: () => import('../views/Flex/Example3View.vue'),
+          meta: {
+            displayName: 'Example #3'
+          }
         }
-      ],
-      meta: {
-        chapter: 'Flex'
-      }
+      ]
     },
     {
       path: '/about',
@@ -96,6 +100,9 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue'),
+      meta: {
+        displayName: 'About'
+      }
     }
   ]
 })
