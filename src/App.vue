@@ -1,12 +1,21 @@
 <script setup>
+import { ref, watch, onMounted } from 'vue';
 import { RouterView, useRouter, useRoute } from 'vue-router'
 // import CustomNavbar from './components/CustomNavbar.vue'
 
 const route = useRoute()
 const router = useRouter()
 
-// console.log(router.getRoutes())
-console.log(router.options.routes)
+const applicationSidebarDark = ref(null)
+
+router.beforeEach((to, from) => {
+  // console.log('navigating to', to.name)
+
+  if (window.HSOverlay) {
+    // close sidebar
+    HSOverlay.close(applicationSidebarDark.value)
+  }
+})
 </script>
 
 <template>
@@ -15,8 +24,7 @@ console.log(router.options.routes)
     class="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-gray-800 dark:border-gray-700">
     <div class="flex items-center py-4">
       <!-- Navigation Toggle -->
-      <button type="button" class="text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar-dark"
-        aria-controls="application-sidebar-dark" aria-label="Toggle navigation">
+      <button type="button" class="text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar-dark">
         <span class="sr-only">Toggle Navigation</span>
         <svg class="w-5 h-5" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
           <path fill-rule="evenodd"
@@ -30,21 +38,16 @@ console.log(router.options.routes)
         <li class="flex items-center text-sm text-gray-800 dark:text-gray-400">
           Tailwind CSS
           <svg class="flex-shrink-0 mx-3 overflow-visible h-2.5 w-2.5 text-gray-400 dark:text-gray-600" width="16"
-          height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" />
-        </svg>
+            height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" />
+          </svg>
         </li>
         <div v-for="(matched, idx) in route.matched" :key="idx">
           <li v-if="idx != Object.keys(route.matched).length - 1"
             class="text-sm text-gray-800 truncate dark:text-gray-400" aria-current="page">
             <RouterLink :to="matched.path">{{ matched.meta.displayName }}</RouterLink>
             <span class="ml-1">/</span>
-            <!-- <svg class="flex-shrink-0 mx-3 overflow-visible h-2.5 w-2.5 text-gray-400 dark:text-gray-600" width="16"
-                                                                                          height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                          <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor"
-                                                                                            stroke-width="2" stroke-linecap="round" />
-                                                                                        </svg> -->
           </li>
           <li v-else class="text-sm font-semibold text-gray-800 truncate dark:text-gray-400" aria-current="page">
             {{ matched.meta.displayName }}
@@ -57,7 +60,7 @@ console.log(router.options.routes)
   <!-- End Sidebar Toggle -->
 
   <!-- Sidebar -->
-  <div id="application-sidebar-dark"
+  <div ref="applicationSidebarDark" id="application-sidebar-dark"
     class="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[60] w-64 bg-gray-900 border-r border-gray-800 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0">
     <!-- Sidebar Header -->
     <div class="px-6">
@@ -90,3 +93,16 @@ console.log(router.options.routes)
     <RouterView />
   </div>
 </template> -->
+
+
+<!--
+  sidebar classes
+   
+  a) open
+
+  hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform fixed top-0 left-0 bottom-0 z-[60] w-64 bg-gray-900 border-r border-gray-800 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 open
+
+  b) closed
+
+  hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform fixed top-0 left-0 bottom-0 z-[60] w-64 bg-gray-900 border-r border-gray-800 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 hidden
+ -->
