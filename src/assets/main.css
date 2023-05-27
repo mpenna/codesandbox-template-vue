@@ -31,10 +31,11 @@ styles if you want to refer to any of the values defined in your theme */
   default-class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-md hover:bg-gray-800 hover:text-white-300"  
   active-class="flex items-center gap-x-3 py-2 px-2.5 bg-gray-700 text-sm text-white rounded-md"
   exact-active-class="flex items-center gap-x-3 py-2 px-2.5 bg-gray-700 text-sm text-white rounded-md"
+  inactive-class="flex items-center gap-x-3 py-2 px-2.5 bg-red-700 text-sm text-white rounded-md"
   */
 
   nav a.router-link {
-    @apply flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-md hover:bg-gray-800 hover:text-white-300
+    @apply flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-md hover:bg-gray-800 hover:text-white
   }
 
   nav a.router-link-active {
@@ -44,4 +45,8 @@ styles if you want to refer to any of the values defined in your theme */
   nav a.router-link-exact-active {
     @apply flex items-center gap-x-3 py-2 px-2.5 bg-gray-700 text-sm text-white rounded-md
   }
+
+  /* nav a.router-link-inactive {
+    @apply flex items-center gap-x-3 py-2 px-2.5 bg-red-700 text-sm text-white rounded-md
+  } */
 }

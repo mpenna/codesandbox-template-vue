@@ -1,15 +1,7 @@
 <script setup>
-import { computed } from '@vue/reactivity';
-import { RouterLink, useRoute } from 'vue-router'
+// import { computed } from '@vue/reactivity';
+// import { RouterLink, useRoute } from 'vue-router'
 import NavLink from './NavLink.vue';
-
-// const router = useRouter()
-
-// const { currentRoute } = router
-
-// const routes = router.getRoutes()
-
-// const route = useRoute()
 
 const props = defineProps({
   name: {
@@ -57,21 +49,7 @@ const nodeAttrs = (node) => {
   }
 
   return obj
-
-  // return {
-  //   id: node.children?.length ? `${node.name}-accordion` : '',
-  //   class: { 'hs-accordion': node.children?.length }
-  // }
 }
-
-// console.log({
-//   // currentRoute: route.name,
-//   // currentParams: route.params,
-//   name: props.name,
-//   path: props.path,
-//   label: props.label,
-//   nodes: props.nodes,
-// })
 </script>
 
 <template>
@@ -194,5 +172,5 @@ const nodeAttrs = (node) => {
     Dashboard 
   </a>  
 
-  
+
 -->
