@@ -27,11 +27,21 @@ styles if you want to refer to any of the values defined in your theme */
     @apply bg-gray-50 dark:bg-slate-900
   }
 
-  /* a.router-link-active {
+  /* 
+  default-class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-md hover:bg-gray-800 hover:text-white-300"  
+  active-class="flex items-center gap-x-3 py-2 px-2.5 bg-gray-700 text-sm text-white rounded-md"
+  exact-active-class="flex items-center gap-x-3 py-2 px-2.5 bg-gray-700 text-sm text-white rounded-md"
+  */
+
+  nav a.router-link {
+    @apply flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-md hover:bg-gray-800 hover:text-white-300
+  }
+
+  nav a.router-link-active {
     @apply flex items-center gap-x-3 py-2 px-2.5 bg-gray-700 text-sm text-white rounded-md
   }
 
-  a.router-link-exact-active {
+  nav a.router-link-exact-active {
     @apply flex items-center gap-x-3 py-2 px-2.5 bg-gray-700 text-sm text-white rounded-md
-  } */
+  }
 }
