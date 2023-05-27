@@ -19,9 +19,9 @@ import Sidebar from './components/Sidebar.vue'
       </button>
       <!-- End Sidebar Toggle -->
 
-      <!-- Breadcrumb -->
+      <!-- Breadcrumbs -->
       <Breadcrumbs />
-      <!-- End Breadcrumb -->
+      <!-- End Breadcrumbs -->
     </div>
   </div>
   <!-- End Navbar -->
